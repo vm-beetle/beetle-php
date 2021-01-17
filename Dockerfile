@@ -51,7 +51,7 @@ RUN set -xe; \
     #
     # next lines are here becase there is no auto build on dockerhub see https://github.com/laradock/laradock/pull/1903#issuecomment-463142846
     libzip-dev zip unzip && \
-    if [ ${LARADOCK_PHP_VERSION} = "7.3" ] || [ ${LARADOCK_PHP_VERSION} = "7.4" ]; then \
+    if [ ${BEETLE_PHP_VERSION} = "7.3" ] || [ ${BEETLE_PHP_VERSION} = "7.4" ]; then \
     docker-php-ext-configure zip; \
     else \
     docker-php-ext-configure zip --with-libzip; \
@@ -231,7 +231,7 @@ ARG INSTALL_PHPDBG=false
 
 RUN if [ ${INSTALL_PHPDBG} = true ]; then \
     # Load the xdebug extension only with phpunit commands
-    apt-get install -y --force-yes php${LARADOCK_PHP_VERSION}-phpdbg \
+    apt-get install -y --force-yes php${BEETLE_PHP_VERSION}-phpdbg \
     ;fi
 
 ###########################################################################
@@ -539,7 +539,7 @@ RUN if [ ${INSTALL_IONCUBE} = true ]; then \
     # Install the php ioncube loader
     curl -L -o /tmp/ioncube_loaders_lin_x86-64.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
     && tar zxpf /tmp/ioncube_loaders_lin_x86-64.tar.gz -C /tmp \
-    && mv /tmp/ioncube/ioncube_loader_lin_${LARADOCK_PHP_VERSION}.so $(php -r "echo ini_get('extension_dir');")/ioncube_loader.so \
+    && mv /tmp/ioncube/ioncube_loader_lin_${BEETLE_PHP_VERSION}.so $(php -r "echo ini_get('extension_dir');")/ioncube_loader.so \
     && printf "zend_extension=ioncube_loader.so\n" > $PHP_INI_DIR/conf.d/0ioncube.ini \
     && rm -rf /tmp/ioncube* \
     ;fi
@@ -903,7 +903,7 @@ RUN if [ ${INSTALL_CACHETOOL} = true ]; then \
 # Check PHP version:
 ###########################################################################
 
-RUN set -xe; php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
+RUN set -xe; php -v | head -n 1 | grep -q "PHP ${BEETLE_PHP_VERSION}."
 
 #
 #--------------------------------------------------------------------------
