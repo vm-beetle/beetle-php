@@ -13,7 +13,7 @@
 #
 
 ARG BEETLE_PHP_VERSION=7.1
-ARG BASE_IMAGE_TAG_PREFIX=latest
+ARG BASE_IMAGE_TAG_PREFIX=v1.0.0
 FROM registry.cn-beijing.aliyuncs.com/vm-beetle/php-fpm${BEETLE_PHP_VERSION}
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
